@@ -1,4 +1,11 @@
 CollectionistServer::Application.routes.draw do
+  resources :reports do
+    match 'run', :as => :run
+  end
+
+  resources :projects
+
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

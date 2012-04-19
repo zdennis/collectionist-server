@@ -11,7 +11,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120416151141) do
+ActiveRecord::Schema.define(:version => 20120419203700) do
+
+  create_table "commits", :force => true do |t|
+    t.integer  "report_id"
+    t.string   "status"
+    t.string   "sha"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "delayed_jobs", :force => true do |t|
     t.integer  "priority",   :default => 0
@@ -28,5 +36,22 @@ ActiveRecord::Schema.define(:version => 20120416151141) do
   end
 
   add_index "delayed_jobs", ["priority", "run_at"], :name => "delayed_jobs_priority"
+
+  create_table "projects", :force => true do |t|
+    t.string   "name"
+    t.string   "git_repository_url"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+  end
+
+  create_table "reports", :force => true do |t|
+    t.string   "name"
+    t.string   "status",         :default => "pending"
+    t.integer  "project_id"
+    t.integer  "total_commits"
+    t.integer  "current_commit"
+    t.datetime "created_at",                            :null => false
+    t.datetime "updated_at",                            :null => false
+  end
 
 end
